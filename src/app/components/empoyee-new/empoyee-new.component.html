@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-header">
+        Pridėti naują darbuotoją
+    </div>
+    <div class="card-body">
+        <form [formGroup]="eForm" (ngSubmit)="newEmployee()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Vardas:</label>
+                <input id="name" class="form-control" formControlName="name" placeholder="Įveskite darbuotojo vardą">
+                <span *ngIf="!eForm.get('name')?.valid && eForm.get('name')?.touched  ">Vardas įvestas neteisingai</span>
+            </div>
+            <div class="mb-3">
+                <label for="surname" class="form-label">Pavardė:</label>
+                <input id="surname" class="form-control" formControlName="surname" placeholder="Įveskite darbuotojo pavardę">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Lytis:</label>
+                <select  id="gender" class="form-control" formControlName="gender">
+                    <option value="male">Vyras</option>
+                    <option value="female">Moteris</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">El. pašto adresas:</label>
+                <input  id="email" class="form-control" formControlName="email" placeholder="Įveskite darbuotojo el. paštą">
+            </div>
+            
+            <button type="submit" class="btn btn-success" [disabled]="!eForm.valid" >Pridėti</button>
+        
+        </form>
+    </div>
+</div>
+
