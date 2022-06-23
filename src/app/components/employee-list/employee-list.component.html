@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-header">Darbuotojų sąrašas</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Vardas</th>
+                    <th>Pavardė</th>
+                    <th>Lytis</th>
+                    <th>El. pašto adresas</th>
+                    <th>Telefonai</th>
+                    <th>Adresai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.surname }}</td>
+                    <td>{{ employee.gender }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>
+                       <div *ngFor="let phone of employee.phones">{{ phone }}</div> 
+                    </td>
+                    <td>
+                        <div *ngFor="let address of employee.addresses">
+                            {{ address.city }}  {{ address.street }} 
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
