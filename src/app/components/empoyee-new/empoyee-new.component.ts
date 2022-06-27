@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -16,7 +18,7 @@ export class EmpoyeeNewComponent implements OnInit {
       'name': new FormControl(null, [this.uzdraustiVardai, Validators.required]),
       'surname':new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
       'gender':new FormControl('male'),
-      'email':new FormControl(null, [Validators.email, Validators.required]),
+      'email':new FormControl(null, [Validators.email, Validators.required], this.emailAvailable()),
       'phones':new FormArray([]),
       'addresses':new FormArray([])
     });
@@ -31,6 +33,25 @@ export class EmpoyeeNewComponent implements OnInit {
       return {'vardasNegalimas':true}
     }else{
       return null;
+    }
+  }
+
+  emailAvailable():AsyncValidatorFn{
+    return (control:AbstractControl):Observable<ValidationErrors|null>=>{
+      return this.employeeService.getEmployees().pipe( map((response)=>{
+          let exist=false;
+          response.forEach((empoyee)=>{
+            if (empoyee.email==control.value){
+              exist=true;
+            }
+          });
+          if (exist){
+            return {"error":"Toks el. pastas egzistuoja"};
+          }else{
+            return null;
+          }
+          
+      }))
     }
   }
 
@@ -63,6 +84,14 @@ export class EmpoyeeNewComponent implements OnInit {
 
   public abstractToFormGroup(formGroup:AbstractControl){
     return <FormGroup>formGroup;
+  }
+
+  public outError(){
+    let control=this.eForm.get('email');
+    if (control?.errors!=null){
+      return (control.errors['error']);
+    }
+    return "";
   }
 
 }
