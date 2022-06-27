@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+import { CitiesService } from 'src/app/services/cities.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -12,8 +13,9 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class EmpoyeeNewComponent implements OnInit {
 
   public eForm:FormGroup;
+  public cities:{city:string}[]=[];
 
-  constructor(private employeeService:EmployeeService) { 
+  constructor(private employeeService:EmployeeService, private citiesService:CitiesService) { 
     this.eForm=new FormGroup({
       'name': new FormControl(null, [this.uzdraustiVardai, Validators.required]),
       'surname':new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
@@ -24,8 +26,16 @@ export class EmpoyeeNewComponent implements OnInit {
     });
   }
 
+  private getCities(){
+    this.citiesService.getCities().subscribe((result)=>{
+      this.cities=result;
+    });
+  }
   ngOnInit(): void {
-    
+    this.getCities();
+    this.citiesService.citiesUpdated.subscribe(()=>{
+      this.getCities();
+    });
   }
 
   uzdraustiVardai(control:AbstractControl): {[s:string]:boolean}|null{

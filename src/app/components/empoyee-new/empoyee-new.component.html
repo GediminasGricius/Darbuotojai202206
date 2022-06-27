@@ -44,7 +44,9 @@
                         </div>
 
                         <div class="col-md-4">
-                            <input type="text" formControlName="city" class="form-control " placeholder="Miestas">
+                           <select class="form-control" formControlName="city">
+                                <option *ngFor="let city of cities">{{ city.city }}</option>
+                           </select>
                         </div>
                         <div class="col-md-7">
                             <input  type="text" formControlName="street" class="form-control" placeholder="Gatvė ir namo numeris">
