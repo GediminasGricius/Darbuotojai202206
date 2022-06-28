@@ -10,6 +10,8 @@
                     <th>El. pašto adresas</th>
                     <th>Telefonai</th>
                     <th>Adresai</th>
+                    <th>Užbaigti darbai</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +27,12 @@
                         <div *ngFor="let address of employee.addresses">
                             {{ address.city }}  {{ address.street }} 
                         </div>
+                    </td>
+                    <td>
+                        {{ employee.completedworks }}
+                    </td>
+                    <td>
+                        <button class="btn btn-success" (click)="increaseCompletedWorks(employee.id)">Darbas baigtas</button>
                     </td>
                 </tr>
             </tbody>

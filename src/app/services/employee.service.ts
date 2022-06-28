@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Employee } from '../models/employee';
 
@@ -8,6 +8,9 @@ import { Employee } from '../models/employee';
 })
 export class EmployeeService {
   private readonly url="https://darbuotojaibit-default-rtdb.europe-west1.firebasedatabase.app/";
+
+  public onEmployeesUpdated=new EventEmitter();
+
   constructor(private http:HttpClient) { 
 
   }
@@ -26,6 +29,19 @@ export class EmployeeService {
         return employees;
       })
     )
+  }
+
+  public increaseCompletedWorks(id:string){
+    let completedworks=0;
+    this.http.get<number>(this.url+"employees/"+id+"/completedworks.json").subscribe((response)=>{
+      console.log(response);
+      completedworks=response;
+      completedworks++;
+      this.http.patch(this.url+"employees/"+id+".json",{completedworks:completedworks}).subscribe((respose)=>{
+        console.log(respose);
+        this.onEmployeesUpdated.emit();
+      })
+    })
   }
 
 }
