@@ -10,6 +10,7 @@ export class EmployeeService {
   private readonly url="https://darbuotojaibit-default-rtdb.europe-west1.firebasedatabase.app/";
 
   public onEmployeesUpdated=new EventEmitter();
+  public employees:Employee[]=[];
 
   constructor(private http:HttpClient) { 
 
@@ -26,9 +27,20 @@ export class EmployeeService {
         for (let key in response){
           employees.push({...response[key],id:key});
         }
+        this.employees=employees;
         return employees;
       })
     )
+  }
+
+  public getEmployee(id:string):Employee|null{
+    let result:Employee|null=null;
+    this.employees.forEach((employee)=>{
+      if (employee.id!=null && employee.id==id){
+        result=employee;
+      }
+    });
+    return result;
   }
 
   public increaseCompletedWorks(id:string){
