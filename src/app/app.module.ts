@@ -16,7 +16,6 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 @NgModule({
   declarations: [
     AppComponent,
-    
     CityAddComponent,
     EmpoyeeNewComponent,
     EmployeeListComponent,

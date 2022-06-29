@@ -1,5 +1,18 @@
+<div class="row mb-3">
+    <div class="col-md-3 text-end">
+        Filtruoti pagal lytį:
+    </div>
+    <div class="col-md-3">
+        <select [(ngModel)]="filterGender" class="form-control" (change)="filter()">
+            <option value="0">Visi</option>
+            <option value="1">Vyrai</option>
+            <option value="2">Moterys</option>
+        </select>
+    </div>
+    
+</div>
 <div class="row">
-    <app-employee-item *ngFor="let employee of employees" class="col-lg-3 col-md-4" [employee]="employee"></app-employee-item>
+    <app-employee-item *ngFor="let employee of employeesDisplay" class="col-lg-3 col-md-4" [employee]="employee"></app-employee-item>
 </div>
 
 
