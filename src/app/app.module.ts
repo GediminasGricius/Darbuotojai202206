@@ -9,28 +9,27 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import { CityAddComponent } from './components/city-add/city-add.component';
 import { EmployeeItemComponent } from './components/employee-list/employee-item/employee-item.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
-const routes:Routes=[
- {path:'', component:EmployeeListComponent},
- {path:'employee/:id', component:EmployeeDetailsComponent}
-]
 
 @NgModule({
   declarations: [
     AppComponent,
+    
+    CityAddComponent,
     EmpoyeeNewComponent,
     EmployeeListComponent,
-    CityAddComponent,
     EmployeeItemComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

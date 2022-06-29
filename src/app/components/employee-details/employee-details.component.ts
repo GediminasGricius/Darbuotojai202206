@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -10,11 +10,18 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EmployeeDetailsComponent implements OnInit {
   public employee:Employee|null=null;
-  constructor(private employeeService:EmployeeService, private route:ActivatedRoute) { }
+  constructor(private employeeService:EmployeeService, private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     let id=this.route.snapshot.params['id'];
     this.employee=this.employeeService.getEmployee(id);
+  }
+
+  public increaseCompletedWorks(id?:string){
+    if (id!=null){
+      this.employeeService.increaseCompletedWorks(id);
+      this.router.navigate(["/"]);
+    }
   }
 
 }

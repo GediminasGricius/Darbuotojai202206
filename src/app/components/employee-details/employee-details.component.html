@@ -2,5 +2,30 @@
     <div class="card-header">Darbuotojo informacija</div>
     <div class="card-body">
         <h5 class="card-title">vardas, pavardė: <b>{{ employee?.name }} {{ employee?.surname }}</b></h5>
+        <hr>
+        <p>Lytis: <b>{{ (employee?.gender=="male")?"Vyras":"Moteris" }}</b></p> 
+        <p>Email: <b>{{ employee?.email }}</b></p>
+        <p>Užbaigta darbų: <b>{{ employee?.completedworks }}</b></p> 
+        <p>Telefono nr.: 
+            <span *ngFor="let phone of employee?.phones">{{ phone }}&nbsp;&nbsp;</span>
+        </p>
+        <h5>Adresai:</h5>
+        <table class="table">
+            <thead>
+                <th>Miestas</th>
+                <th>Gatvė</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let address of employee?.addresses">
+                    <td>{{ address.city }}</td>
+                    <td>{{ address.street }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="float-start"> <span class="text-muted"> Atlikta darbų: <b>{{ employee?.completedworks }}</b></span></div>
+        <button class="btn btn-success float-end btn-sm" (click)="increaseCompletedWorks(employee?.id)">Darbas atliktas</button> 
     </div>
 </div>

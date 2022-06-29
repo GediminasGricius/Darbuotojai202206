@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Employee } from '../models/employee';
 
@@ -12,7 +13,7 @@ export class EmployeeService {
   public onEmployeesUpdated=new EventEmitter();
   public employees:Employee[]=[];
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient, private router:Router) { 
 
   }
 
@@ -40,11 +41,18 @@ export class EmployeeService {
         result=employee;
       }
     });
+    if (result==null){
+      this.router.navigate(["/"]);
+    }
     return result;
   }
 
   public increaseCompletedWorks(id:string){
     let completedworks=0;
+    let a={
+      ads:4,
+      asd:4
+    }
     this.http.get<number>(this.url+"employees/"+id+"/completedworks.json").subscribe((response)=>{
       console.log(response);
       completedworks=response;

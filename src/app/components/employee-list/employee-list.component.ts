@@ -26,10 +26,6 @@ export class EmployeeListComponent implements OnInit {
     })
   }
 
-  public increaseCompletedWorks(id?:string){
-    if (id!=null){
-      this.employeeService.increaseCompletedWorks(id);
-    }
-  }
+
 
 }
