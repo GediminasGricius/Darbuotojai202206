@@ -11,6 +11,7 @@ import { EmployeeItemComponent } from './components/employee-list/employee-item/
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

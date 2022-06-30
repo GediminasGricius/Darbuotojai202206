@@ -1,0 +1,7 @@
+.blokelis{
+    width: 100px;
+    height: 100px;
+    background-color: #ff0000;
+    z-index: 1000;
+    position: absolute;
+}
