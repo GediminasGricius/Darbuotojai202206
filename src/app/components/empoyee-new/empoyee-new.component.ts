@@ -14,30 +14,35 @@ import { EmployeeService } from 'src/app/services/employee.service';
     trigger("blokelis",
       [
          state("pirma", style({
-          'background-color':'#ff0000',
-          transform:'translateX(-200px)',
-          height:'50px',
-          width:'50px',
+          height:'50px'
          })),
          state("antra", style({
-           'background-color':'#00ff00',
-           transform:'translateX(100px)',
-           height:'100px',
-           width:'100px',
+           height:'300px'
          })),
          transition('pirma=>antra',[
-            animate(1000, style({
-              transform:'translateX(100px)',
-              'background-color':'#00ff00',
-            })),
             animate(1000)
          ]),
          transition('antra=>pirma',[
-            animate(1000, style({
-              height:'1000px',
-              width:'1000px',
-            })),
-            animate(500)
+            animate(1000)
+         ])
+      ]
+    ),
+
+    trigger("mygtukas",
+      [
+         state("pirma", style({
+         // opacity:0
+           transform:"translateX(-1000px)"
+         })),
+         state("antra", style({
+         // opacity:1
+           transform:"translateX(0px)"
+         })),
+         transition('pirma=>antra',[
+            animate(1000)
+         ]),
+         transition('antra=>pirma',[
+            animate(1000)
          ])
       ]
     ),
@@ -49,6 +54,8 @@ export class EmpoyeeNewComponent implements OnInit {
   public eForm:FormGroup;
   public cities:{city:string}[]=[];
   public busena="pirma";
+
+  public mygtukoBusena="pirma";
 
   constructor(private employeeService:EmployeeService, private citiesService:CitiesService) { 
     this.eForm=new FormGroup({
@@ -71,6 +78,14 @@ export class EmpoyeeNewComponent implements OnInit {
     this.citiesService.citiesUpdated.subscribe(()=>{
       this.getCities();
     });
+    this.eForm.statusChanges.subscribe((state)=>{
+      if (state=="INVALID"){
+        this.mygtukoBusena="pirma";
+      }else{
+        this.mygtukoBusena="antra";
+      }
+      //valid, invalid, pending
+    })
   }
 
   uzdraustiVardai(control:AbstractControl): {[s:string]:boolean}|null{
@@ -143,9 +158,17 @@ export class EmpoyeeNewComponent implements OnInit {
     if (this.busena=="pirma"){
       this.busena="antra";
     } else {
-      this. busena="pirma";
+     
     }
     
+  }
+
+  onFocus(){
+    this.busena="antra";
+  }
+
+  onFocusout(){
+    this.busena="pirma";
   }
 
 }
