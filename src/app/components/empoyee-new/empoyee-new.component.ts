@@ -38,14 +38,48 @@ import { EmployeeService } from 'src/app/services/employee.service';
          // opacity:1
            transform:"translateX(0px)"
          })),
-         transition('pirma=>antra',[
-            animate(1000)
-         ]),
-         transition('antra=>pirma',[
+         transition('* => *',[
             animate(1000)
          ])
       ]
     ),
+    trigger("forma",
+    [
+       state("VALID", style({
+          "background-color":"#00ff00"
+       })),
+       state("INVALID", style({
+          "background-color":"#ff0000"
+       })),
+       state("PENDING", style({
+        "background-color":"#0000ff"
+        })),
+       transition('* => *',[
+          animate(1000)
+       ])
+    ]
+  ),
+    trigger("telefonas",
+    [
+      state("in",style({
+        'opacity':'1',
+        'height':'24px'
+      })),
+     
+
+      transition("void => *", [
+        style({
+          'opacity':'0',
+          'height':'0px'
+          
+        }),
+        animate(500,style({
+          'opacity':'0',
+          'height':'24px'
+        })),
+        animate(500)
+      ])
+    ])
     
   ]
 })
@@ -54,6 +88,7 @@ export class EmpoyeeNewComponent implements OnInit {
   public eForm:FormGroup;
   public cities:{city:string}[]=[];
   public busena="pirma";
+  public formastate="INVALID";
 
   public mygtukoBusena="pirma";
 
@@ -79,6 +114,7 @@ export class EmpoyeeNewComponent implements OnInit {
       this.getCities();
     });
     this.eForm.statusChanges.subscribe((state)=>{
+      this.formastate=state;
       if (state=="INVALID"){
         this.mygtukoBusena="pirma";
       }else{

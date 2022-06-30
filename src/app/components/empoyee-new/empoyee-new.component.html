@@ -10,7 +10,7 @@
     <div class="card-header">
         Pridėti naują darbuotoją
     </div>
-    <div class="card-body">
+    <div class="card-body" [@forma]="formastate">
         <form [formGroup]="eForm" (ngSubmit)="newEmployee()">
             <div class="mb-3">
                 <label for="name" class="form-label">Vardas:</label>
@@ -37,7 +37,7 @@
             <hr>
             <div formArrayName="phones">
                 <h4>Telefono numeriai</h4>
-                <div *ngFor="let phoneControl of phones(); let i=index" class="mb-3">
+                <div *ngFor="let phoneControl of phones(); let i=index" class="mb-3" [@telefonas]>
                     <input type="text" class="form-control" [formControlName]="i">
                 </div>
             </div>
