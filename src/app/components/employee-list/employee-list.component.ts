@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -12,6 +13,7 @@ export class EmployeeListComponent implements OnInit {
   public employees:Employee[]=[];
   public employeesDisplay:Employee[]=[];
   public filterGender:number=0;
+  public pasirinktas=false;
 
   constructor(private employeeService:EmployeeService) { }
 
@@ -44,6 +46,8 @@ export class EmployeeListComponent implements OnInit {
     this.filterEmpoyees();
   }
 
-
+  public filter2(){
+    console.log(this.pasirinktas)
+  }
 
 }
