@@ -1,20 +1,25 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AboutComponent } from "./about/components/about/about.component";
-import { CityAddComponent } from "./components/city-add/city-add.component";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { EmployeeDetailsComponent } from "./components/employee-details/employee-details.component";
 import { EmployeeListComponent } from "./components/employee-list/employee-list.component";
 import { EmpoyeeNewComponent } from "./components/empoyee-new/empoyee-new.component";
+import { CustomPreloadingStrategyService } from "./services/custom-preloading-strategy.service";
 
 const routes:Routes=[
     {path:'', component:EmployeeListComponent},
     {path:'employee/:id', component:EmployeeDetailsComponent},
-    {path:'employeeAdd', component:EmpoyeeNewComponent}   
+    {path:'employeeAdd', component:EmpoyeeNewComponent},
+    {   
+        path:'about', 
+        loadChildren:()=>import('./about/about.module').then(m=>m.AboutModule),
+        data:{ uzkrauk:true }
+    },
+    {path:'cities',loadChildren:()=>import('./cities/cities.module').then(m=>m.CitiesModule)}
 ];
 
 @NgModule({
     imports:[
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, {preloadingStrategy:PreloadAllModules})
     ],
     exports:[
         RouterModule

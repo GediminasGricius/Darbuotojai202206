@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Employee } from '../models/employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private readonly url="https://darbuotojaibit-default-rtdb.europe-west1.firebasedatabase.app/";
+  private readonly url=environment.dbUrl;
 
   public onEmployeesUpdated=new EventEmitter();
   public employees:Employee[]=[];

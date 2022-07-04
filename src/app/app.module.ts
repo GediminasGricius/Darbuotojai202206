@@ -11,8 +11,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AboutModule } from './about/about.module';
-import { CitiesModule } from './cities/cities.module';
+
 
 
 @NgModule({
@@ -30,9 +29,7 @@ import { CitiesModule } from './cities/cities.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    AboutModule,
-    CitiesModule
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
