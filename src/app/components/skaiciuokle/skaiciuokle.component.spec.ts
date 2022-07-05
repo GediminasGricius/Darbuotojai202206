@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SkaiciuotiService } from 'src/app/services/skaiciuoti.service';
 
 import { SkaiciuokleComponent } from './skaiciuokle.component';
 
@@ -42,4 +43,17 @@ describe('SkaiciuokleComponent', () => {
     fixture.detectChanges();
     expect(compiled.querySelector('.vat')).toBeNull();
   })
+
+  it ('turi gražinti teisingą darbuotojų skaičių', ()=>{
+    
+    let skaiciuotiService=fixture.debugElement.injector.get(SkaiciuotiService);
+    spyOn<SkaiciuotiService,any>(skaiciuotiService,'grazinkDarbuotojuSkaiciu').and.returnValue(60);
+
+    component.ngOnInit();
+
+    let compiled=fixture.debugElement.nativeElement;
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.darbuotoju').textContent).toEqual('60');
+  });
 });

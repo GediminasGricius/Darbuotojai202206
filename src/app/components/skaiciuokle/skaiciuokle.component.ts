@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SkaiciuotiService } from 'src/app/services/skaiciuoti.service';
 
 @Component({
   selector: 'app-skaiciuokle',
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class SkaiciuokleComponent implements OnInit {
 
   public kaina:number|null=null;
+  public darbuotoju:number=0;
 
-  constructor() { }
+  constructor(private skaiciuoti:SkaiciuotiService) { }
 
   ngOnInit(): void {
+    this.darbuotoju=this.skaiciuoti.grazinkDarbuotojuSkaiciu();
+
   }
 
   public skaiciuotiPVM():number|null{

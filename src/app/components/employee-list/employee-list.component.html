@@ -14,7 +14,11 @@
   [(ngModel)]="pasirinktas" (change)="filter2()">
 </div>
 <div class="row">
-    <app-employee-item *ngFor="let employee of employeesDisplay" class="col-lg-3 col-md-4" [employee]="employee"></app-employee-item>
+   <table>
+    <tr *ngFor="let employee of employeesDisplay">
+        <td class="name">{{employee.name}}</td>
+    </tr>
+   </table>
 </div>
 
 
