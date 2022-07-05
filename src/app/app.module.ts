@@ -11,8 +11,8 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { SkaiciuokleComponent } from './components/skaiciuokle/skaiciuokle.component';
+
 
 
 
@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
     EmployeeItemComponent,
     EmployeeDetailsComponent,
     NavigationComponent,
+    SkaiciuokleComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,13 +32,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

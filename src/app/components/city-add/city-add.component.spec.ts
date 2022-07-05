@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CityAddComponent } from './city-add.component';
@@ -8,7 +9,8 @@ describe('CityAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CityAddComponent ]
+      declarations: [ CityAddComponent ],
+      imports: [HttpClientModule]
     })
     .compileComponents();
   });
